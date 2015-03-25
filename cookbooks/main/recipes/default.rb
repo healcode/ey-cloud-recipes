@@ -99,6 +99,9 @@ include_recipe "rails_secrets_databag"
 #uncomment to include the Elasticsearch recipe
 #include_recipe "elasticsearch"
 
+#uncomment to include the Elasticsearch recipe on solos and app masters
+#include_recipe "elasticsearch::non_util"
+
 # To install specific plugins to Elasticsearch see below as an example
 #es_plugin "cloud-aws" do
 #  action :install
@@ -115,6 +118,9 @@ include_recipe "rails_secrets_databag"
 
 #uncomment to include the Magento recipe
 #include_recipe "magento"
+
+# uncomment to include the Postgres Maintenance recipe
+#include_recipe "postgresql_maintenance"
 
 #enable Extension modules for a given Postgresql database
 # if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
@@ -156,10 +162,15 @@ include_recipe "rails_secrets_databag"
   # postgresql9_file_fdw "dbname"
   # postgresql9_xml2 "dbname"
 
-  #9.2 Extensions
+  # 9.2 Extensions
+  # Note: pg_stat_statements requires a server restart to complete installation
   # postgresql9_pg_stat_statements "dbname"
 
   # Admin-Level Contribs
   # postgresql9_pg_buffercache "postgres"
   # postgresql9_pg_freespacemap "postgres"
 # end
+
+#uncomment to include the motd customization related to the environment
+#include_recipe "env_motd"
+
