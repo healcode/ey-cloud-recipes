@@ -1,5 +1,3 @@
-include_recipe "rails_secrets_databag"
-
 #execute "testing" do
 #  command %Q{
 #    echo "i ran at #{Time.now}" >> /root/cheftime
@@ -72,7 +70,7 @@ include_recipe "rails_secrets_databag"
 # include_recipe "resque-scheduler"
 
 #uncomment to run the redis recipe
-#include_recipe "redis"
+include_recipe "redis"
 
 #uncomment to run the api-keys-yml recipe
 # include_recipe "api-keys-yml"
@@ -173,4 +171,7 @@ include_recipe "rails_secrets_databag"
 
 #uncomment to include the motd customization related to the environment
 #include_recipe "env_motd"
+
+# uncomment to include Rails secrets.yml contents in an encrypted databag
+include_recipe "rails_secrets_databag"
 
