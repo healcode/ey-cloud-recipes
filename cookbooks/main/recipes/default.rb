@@ -72,6 +72,9 @@ include_recipe "redis-yml"
 #uncomment to run the redis recipe
 include_recipe "redis"
 
+#uncomment to run the env-yaml recipe
+#include_recipe "env-yaml"
+
 #uncomment to run the api-keys-yml recipe
 # include_recipe "api-keys-yml"
 
@@ -143,11 +146,12 @@ include_recipe "redis"
   # postgresql9_pgcrypto "dbname"
   # postgresql9_pgrowlocks "dbname"
 
-  # PostGis 1.5 (use with versions 9.0, 9.1, 9.2)
+  # PostGis 1.5 (use with versions 9.0, 9.1, 9.2 on 2009a/stable-v2)
   # postgresql9_postgis "dbname"
 
-  # PostGis 2.0 (use with versions >= 9.2)
-  #postgresql9_postgis2 "dbname"
+  # PostGis 2.1 (use with version 9.2 on 2009a/stable-v2 and all versions on 12.11/stable-v4)
+  # postgresql9_postgis2 "dbname"
+
   # postgresql9_seg "dbname"
   # postgresql9_sslinfo "dbname"
   # postgresql9_tablefunc "dbname"
