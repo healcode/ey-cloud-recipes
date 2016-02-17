@@ -15,9 +15,9 @@ app_name = node[:applications].keys.first
 env = node[:environment][:framework_env]
 PAPERTRAIL_CONFIG = {
   :syslog_ng_version         => '3.3.5-r1',
-  :remote_syslog_version     => 'v0.12',
+  :remote_syslog_version     => 'v0.16',
   :remote_syslog_filename    => 'remote_syslog_linux_amd64.tar.gz',
-  :remote_syslog_checksum    => 'ecb1ed1831ef9645c6379151fae6859bfe7db3ac9c6b096ae4a063dc79930a70',
+  :remote_syslog_checksum    => '04055643eb1c0db9ec61a67bdfd58697912acb467f58884759a054f6b5d6bb56',
   :port                      => 111111111111111, # YOUR PORT HERE
   :destination_host          => 'HOST.papertrailapp.com', # YOUR HOST HERE
   :hostname                  => [app_name, node[:instance_role], `hostname`.chomp].join('_'),
@@ -70,10 +70,16 @@ bash 'extract SSL certificates' do
     EOH
 end
 
+service "syslog-ng" do
+    supports :start => true, :stop => true, :restart => true, :status => true
+    action [ :enable, :start ]
+end
+
 template '/etc/syslog-ng/syslog-ng.conf' do
   source 'syslog-ng.conf.erb'
   mode '0644'
   variables(PAPERTRAIL_CONFIG)
+  notifies :restart, resources(:service => "syslog-ng")
 end
 
 # EngineYard Gentoo instances use sysklogd by default
