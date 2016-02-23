@@ -1,3 +1,6 @@
+# uncomment to use a custom database.yml configuration
+# include_recipe "database_yml_custom"
+
 #execute "testing" do
 #  command %Q{
 #    echo "i ran at #{Time.now}" >> /root/cheftime
@@ -176,6 +179,10 @@ include_recipe "redis"
 #uncomment to include the motd customization related to the environment
 #include_recipe "env_motd"
 
+#include_recipe "db_restore"
+
+#uncomment to install PHP 5.5.x
+#include_recipe "php55"
+
 # uncomment to include Rails secrets.yml contents in an encrypted databag
 include_recipe "rails_secrets_databag"
-
