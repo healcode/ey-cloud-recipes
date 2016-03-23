@@ -7,10 +7,17 @@
 # copied over when a new instance boots. This way it only has to
 # be done once per environment, instead of on every boot.
 
-# Note: to encrypt the databag, use knife:
+# NOTE: to encrypt the databag, install the following gems
+#   $> gem install chef
+#   $> gem install knife-solo_data_bag
+#   $> gem install engineyard
+#
+# Then use knife (https://github.com/thbishop/knife-solo_data_bag):
 #   $> knife solo data bag create secrets <databag name> --json-file <location of unencrypted file> --secret-file <location of key>
-# Then to upload to EY, use ey gem:
-#   $>  ey recipes upload --apply -e <environment> --account <account name>
+#
+# Then to upload and apply custom recipes to EY, use engineyard gem (https://github.com/engineyard/engineyard):
+#   $> ey recipes upload --apply -e <environment> --account <account name>
+
 if ['app_master', 'app', 'util', 'solo'].include?(node[:instance_role])
   node[:applications].each do |app, data|
     l = link "/etc/chef/encrypted_data_bag_secret" do
